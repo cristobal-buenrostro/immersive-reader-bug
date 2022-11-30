@@ -1,11 +1,16 @@
-import { launchAsync } from "@microsoft/immersive-reader-sdk"
+import dynamic from "next/dynamic";
+
+const ImmersiveReader = dynamic(
+    () => {
+      return import("./immersive-reader");
+    },
+    { ssr: false }
+  );
 
 export default function Home() {
     return (
         <div>
-            <button onClick={() => launchAsync("token", "immersivereader-ne", { chunks: [{ content: 'Hello world' }] })}>
-                Launch reader
-            </button>
+            <ImmersiveReader />
         </div>
     )
 }
